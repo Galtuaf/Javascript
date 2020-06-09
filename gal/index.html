@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gal Tuaf</title>
+    <meta name="description" content="Gal Tuaf project">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body onload="checkLogin()">
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://rawgit.com/moment/moment/2.2.1/min/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js" integrity="sha256-TQq84xX6vkwR0Qs1qH5ADkP+MvH0W+9E7TdHJsoIQiM=" crossorigin="anonymous"></script>
+
+<dialog id="loginModal">
+    <div class="container login">
+        <div class="row">
+            <div class="col">
+                <h5 class="modal-title" id="loginModalTitle">Welcome</h5>
+                <form onsubmit="return login();">
+                    <div class="form-group">
+                        <label for="inputEmail">Email address</label>
+                        <input type="email" class="form-control" id="inputEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword">Password</label>
+                        <input type="password" class="form-control" id="inputPassword" minlength="4" maxlength="24" required>
+                    </div>
+                    <div id="error" class="error">Wrong login</div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</dialog>
+
+<nav class="navbar navbar-expand-lg navbar-light sticky-top bg-light">
+    <a class="navbar-brand" href="#">
+        <img src="./images/logo.gif" class="img-fluid" alt="Responsive image">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="#" onclick="changePage('student')">Student</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" onclick="changePage('courses')">Courses</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" onclick="changePage('calendar')">Calendar</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" onclick="changePage('contact')">Contact</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" onclick="location.reload()">Logout</a>
+            </li>
+        </ul>
+        <div class="dropdown navbar-text">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Page Color</a>
+            <div class="dropdown-menu">
+                <div class="dropdown-item" onclick="setColor('white')">White</div>
+                <div class="dropdown-item" onclick="setColor('red')">Red</div>
+                <div class="dropdown-item" onclick="setColor('blue')">Blue</div>
+                <div class="dropdown-item" onclick="setColor('green')">Green</div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div id="student">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h3>Student details</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <div class="container details">
+                    <div class="row">
+                        <div class="col">
+                            <i class="fa fa-id-card"></i>
+                            <input type="text" class="text" id="id" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <i class="fa fa-user"></i>
+                            <input type="text" class="text" id="firstname" />
+                            <input type="text" class="text" id="lastname" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <i class="fa fa-home"></i>
+                            <input type="text" class="text" id="address" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <i class="fa fa-envelope"></i>
+                            <input type="email" class="text" id="email" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <i class="fa fa-phone"></i>
+                            <input type="tel" class="text" id="mobile" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <button onclick="saveDetails()">שמור שינויים</button>
+                        </div>
+                        <div class="col" id="save-result"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6">
+                <video width="100%" controls>
+                    <source src="video/video.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="courses">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h3>Courses</h3>
+            </div>
+        </div>
+        <div class="row">
+            <canvas class="col" id="myChart" width="400" height="200"></canvas>
+        </div>
+        <div class="row">
+            <table id="list" class="col">
+                <tr>
+                    <th>Course Name</th>
+                    <th>Code</th>
+                    <th>Exam</th>
+                    <th>Project</th>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div id="calendar">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <h3>Calendar</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div id="student-calendar" class="container">
+                <!-- <div class="row">
+                    <div class="col-12">
+                        <h3 id="monthAndYear"></h3>
+                    </div>
+                </div> -->
+                <div class="row">
+                    <div class="col form-inline">
+                        <div class="col-4" id="previous" onclick="previousMonth()">חודש קודם</div>
+                        <div class="col-4" id="monthAndYear"></div>
+                        <div class="col-4" id="next" onclick="nextMonth()">חודש הבא</div>
+                    </div>
+                </div>
+
+                <div class="container-fluid" id="calendar-table">
+                    <div class="row days">
+                        <div class="col">א</div>
+                        <div class="col">ב</div>
+                        <div class="col">ג</div>
+                        <div class="col">ד</div>
+                        <div class="col">ה</div>
+                        <div class="col">ו</div>
+                        <div class="col">ש</div>
+                    </div>
+                    <div id="calendar-body"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="contact">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h3>Contact</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <div class="container contact">
+                    <div class="row">
+                        <div class="col">
+                            <i class="fa fa-phone"></i> <a id="contact-phone" href="" target="_blank"></a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <i class="fa fa-envelope"></i> <a id="contact-email" href="" target="_blank"></a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <i class="fa fa-whatsapp"></i> <a id="contact-whatsapp" target="_blank"></a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <i class="fa fa-facebook"></i> <a id="contact-facebook" href="https://www.facebook.com/gali.tuaf" target="_blank">Facebook</a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <i class="fa fa-instagram"></i> <a id="contact-instagram" href="https://www.instagram.com/galtuaf/" target="_blank">Instagram</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6">
+                <img src="./images/photo.jpg" class="img-fluid photo" alt="my photo"/>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="application/javascript" src="scripts/script.js"></script>
+<script>
+    if (!checkLogin()) {
+        document.getElementById("loginModal").showModal();
+    } else {
+        changePage('student');
+    }
+</script>
+</body>
+</html>
